@@ -109,9 +109,8 @@ class Bucket extends Client {
 
   /// Uploads file. Returns Etag.
   Future<String> uploadFile(
-      String key, dynamic file, String contentType, Permissions permissions,
+      String key, dynamic file, String contentType, Permissions permissions, int contentLength,
       {Map<String, String> meta}) async {
-    int contentLength = await file.length();
     Digest contentSha256 = await sha256.bind(file.openRead()).first;
     String uriStr = endpointUrl + '/' + key;
     http.StreamedRequest request =
