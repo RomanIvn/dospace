@@ -139,6 +139,20 @@ class Bucket extends Client {
     return etag;
   }
 
+    /// Uploads file. Returns Etag.
+  Future<String> deleteFile(String key) async {
+    String uriStr = endpointUrl + '/' + key;
+    HttpRequest request = http.Request('DELETE', Uri.parse(uriStr));
+    signRequest(request);
+    http.StreamedResponse response = await httpClient.send(request);
+    String body = await utf8.decodeStream(response.stream);
+    if (response.statusCode != 200) {
+      throw new ClientException(response.statusCode, response.reasonPhrase, response.headers, body);
+    }
+    String etag = response.headers['etag'];
+    return etag;
+  }
+
   /// Uploads data from memory. Returns Etag.
   Future<String> uploadData(
       String key, Uint8List data, String contentType, Permissions permissions,
