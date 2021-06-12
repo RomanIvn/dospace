@@ -142,7 +142,7 @@ class Bucket extends Client {
     /// Uploads file. Returns Etag.
   Future<String> deleteFile(String key) async {
     String uriStr = endpointUrl + '/' + key;
-    var request = http.Request('DELETE', Uri.parse(uriStr));
+    http.Request request = http.Request('DELETE', Uri.parse(uriStr));
     signRequest(request);
     http.StreamedResponse response = await httpClient.send(request);
     String body = await utf8.decodeStream(response.stream);
