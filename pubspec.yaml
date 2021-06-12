@@ -9,7 +9,7 @@ dependencies:
   meta: ^1.1.5
   crypto: ^3.0.0
   http: ^0.13.0
-  xml: ^4.0.0
+  xml: ^5.0.0
 
 dev_dependencies:
   test: ^1.0.0
